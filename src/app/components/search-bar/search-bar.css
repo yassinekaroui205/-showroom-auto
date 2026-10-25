@@ -1,0 +1,71 @@
+.panel {
+  margin: 28px 32px;
+  padding: 20px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+.row.bottom { margin-top: 16px; align-items: center; }
+
+.search-box {
+  flex: 2 1 260px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fafafb;
+  color: var(--muted);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(209, 8, 8, 0.12); }
+.search-box input { all: unset; flex: 1; font-weight: 600; color: var(--text); }
+
+.field { display: flex; flex-direction: column; gap: 6px; flex: 1 1 180px; }
+label { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+label strong { color: var(--accent-dark); }
+select {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fafafb;
+  font-weight: 600;
+  cursor: pointer;
+}
+input[type='range'] { accent-color: var(--accent); cursor: pointer; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.chip {
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer; color: var(--text); }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; }
+.count { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
+.count strong { color: var(--accent-dark); font-size: 1.1rem; }
+.reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.reset:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 640px) { .panel { margin: 20px 16px; padding: 16px; } .count { margin-left: 0; } }

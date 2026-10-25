@@ -1,0 +1,49 @@
+<section class="panel">
+  <div class="row">
+    <div class="search-box">
+      <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+      <input type="text" #txt placeholder="Search a brand or a model..."
+             [value]="filters.text" (input)="changeText(txt.value)" />
+    </div>
+
+    <div class="field">
+      <label for="sort">Sort by</label>
+      <select id="sort" #sort [value]="filters.sort" (change)="changeSort(sort.value)">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="power-desc">Most powerful</option>
+      </select>
+    </div>
+
+    <div class="field price-field">
+      <label for="price">Max price: <strong>{{ filters.maxPrice }} DNT</strong></label>
+      <input id="price" type="range" #price min="0" [max]="priceLimit" step="10"
+             [value]="filters.maxPrice" (input)="changeMaxPrice(price.value)" />
+    </div>
+  </div>
+
+  <div class="chips">
+    <button class="chip" [class.active]="filters.brand === ''" (click)="changeBrand(filters.brand)">All</button>
+    @for (b of brands; track b) {
+      <button class="chip" [class.active]="filters.brand === b" (click)="changeBrand(b)">{{ b }}</button>
+    }
+  </div>
+
+  <div class="row bottom">
+    <label class="check">
+      <input type="checkbox" #av [checked]="filters.onlyAvailable" (change)="changeAvailable(av.checked)" />
+      In stock only
+    </label>
+    <label class="check">
+      <input type="checkbox" #fv [checked]="filters.favoritesOnly" (change)="changeFavorites(fv.checked)" />
+      Favorites only
+    </label>
+
+    <span class="count"><strong>{{ resultCount }}</strong> result{{ resultCount > 1 ? 's' : '' }}</span>
+
+    <button class="reset" (click)="onReset.emit()">
+      <fa-icon [icon]="faRotateLeft"></fa-icon> Reset
+    </button>
+  </div>
+</section>

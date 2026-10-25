@@ -1,0 +1,31 @@
+<article class="auto-card" [class.sold-out]="auto.availability <= 0">
+  <div class="img-wrap">
+    <img [src]="'images/images/' + auto.photo" [alt]="auto.brand + ' ' + auto.model" />
+    <span class="stock" [class]="'stock ' + stockClass">{{ stockLabel }}</span>
+    <button class="fav-btn" [class.active]="isFavorite" (click)="onToggleFavorite.emit(auto)"
+            [attr.aria-label]="isFavorite ? 'Remove from favorites' : 'Add to favorites'">
+      <fa-icon [icon]="faHeart"></fa-icon>
+    </button>
+  </div>
+
+  <div class="details">
+    <span class="brand">{{ auto.brand }}</span>
+    <h3>{{ auto.model }}</h3>
+
+    <div class="power">
+      <span class="power-label"><fa-icon [icon]="faBolt"></fa-icon> {{ auto.power }} CV</span>
+      <div class="power-track"><div class="power-fill" [style.width.%]="powerPercent"></div></div>
+    </div>
+
+    <p class="price">{{ auto.price }} <small>DNT</small></p>
+  </div>
+
+  <div class="card-actions">
+    <button class="btn ghost" (click)="onSelect.emit(auto)">
+      <fa-icon [icon]="faEye"></fa-icon> See more
+    </button>
+    <button class="btn primary" [disabled]="auto.availability <= 0" (click)="onReserve.emit(auto)">
+      <fa-icon [icon]="faKey"></fa-icon> Reserve
+    </button>
+  </div>
+</article>

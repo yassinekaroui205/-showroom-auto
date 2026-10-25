@@ -1,0 +1,33 @@
+<div class="backdrop" (click)="onClose.emit()">
+  <aside class="drawer" (click)="$event.stopPropagation()">
+    <header>
+      <h2>My reservations</h2>
+      <button class="icon-btn" (click)="onClose.emit()" aria-label="Close"><fa-icon [icon]="faXmark"></fa-icon></button>
+    </header>
+
+    @if (reservations.length === 0) {
+      <p class="empty">You have no reservation yet.<br />Pick a car and press <strong>Reserve</strong>.</p>
+    } @else {
+      <ul>
+        @for (r of reservations; track r.id) {
+          <li>
+            <img [src]="'images/images/' + r.auto.photo" [alt]="r.auto.model" />
+            <div class="info">
+              <strong>{{ r.auto.brand }} {{ r.auto.model }}</strong>
+              <small>{{ r.date | date: 'dd/MM/yyyy HH:mm' }}</small>
+              <span class="price">{{ r.auto.price }} DNT</span>
+            </div>
+            <button class="icon-btn danger" (click)="onCancel.emit(r)" title="Cancel reservation">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </li>
+        }
+      </ul>
+
+      <footer>
+        <div class="total"><span>Total</span><strong>{{ total }} DNT</strong></div>
+        <button class="clear" (click)="onClear.emit()">Cancel all reservations</button>
+      </footer>
+    }
+  </aside>
+</div>

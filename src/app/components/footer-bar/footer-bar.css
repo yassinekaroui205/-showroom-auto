@@ -1,0 +1,11 @@
+.footer {
+  margin-top: 48px;
+  padding: 22px;
+  text-align: center;
+  color: var(--muted-light);
+  background: #0b0b0d;
+  border-top: 2px solid var(--accent);
+  font-size: 0.9rem;
+}
+.footer strong { color: #fff; }
+.dot { margin: 0 10px; color: var(--accent); }

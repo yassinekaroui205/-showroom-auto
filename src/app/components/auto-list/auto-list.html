@@ -1,0 +1,19 @@
+@if (autos.length > 0) {
+  <section class="grid">
+    @for (auto of autos; track auto.id) {
+      <app-auto-card
+        [auto]="auto"
+        [isFavorite]="isFavorite(auto)"
+        (onSelect)="onSelect.emit($event)"
+        (onToggleFavorite)="onToggleFavorite.emit($event)"
+        (onReserve)="onReserve.emit($event)">
+      </app-auto-card>
+    }
+  </section>
+} @else {
+  <div class="empty">
+    <fa-icon [icon]="faFaceFrown"></fa-icon>
+    <h3>No car matches your search</h3>
+    <p>Try another keyword or reset the filters.</p>
+  </div>
+}

@@ -1,0 +1,43 @@
+<div class="backdrop" (click)="onClose.emit()">
+  <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+    <button class="close" (click)="onClose.emit()" aria-label="Close"><fa-icon [icon]="faXmark"></fa-icon></button>
+
+    <div class="hero">
+      <img [src]="'images/images/' + auto.photo" [alt]="auto.model" />
+    </div>
+
+    <div class="content">
+      <span class="brand">{{ auto.brand }}</span>
+      <h2>{{ auto.model }}</h2>
+
+      <div class="specs">
+        <div class="spec"><fa-icon [icon]="faBolt"></fa-icon><strong>{{ auto.power }} CV</strong><small>Power</small></div>
+        <div class="spec"><fa-icon [icon]="faBoxesStacked"></fa-icon><strong>{{ auto.availability }}</strong><small>In stock</small></div>
+        <div class="spec price"><strong>{{ auto.price }} DNT</strong><small>Price</small></div>
+      </div>
+
+      <p class="desc">{{ auto.description }}</p>
+
+      <div class="actions">
+        <button class="btn ghost" [class.active]="isFavorite" (click)="onToggleFavorite.emit(auto)">
+          <fa-icon [icon]="faHeart"></fa-icon> {{ isFavorite ? 'In favorites' : 'Add to favorites' }}
+        </button>
+        <button class="btn primary" [disabled]="auto.availability <= 0" (click)="onReserve.emit(auto)">
+          <fa-icon [icon]="faKey"></fa-icon> {{ auto.availability > 0 ? 'Reserve this car' : 'Out of stock' }}
+        </button>
+      </div>
+
+      @if (similar.length > 0) {
+        <h4>More from {{ auto.brand }}</h4>
+        <div class="similar">
+          @for (s of similar; track s.id) {
+            <button class="mini" (click)="onSelectSimilar.emit(s)">
+              <img [src]="'images/images/' + s.photo" [alt]="s.model" />
+              <span>{{ s.model }}</span>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

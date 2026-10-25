@@ -1,0 +1,5 @@
+<div class="toast" [class]="'toast ' + message.type" role="status">
+  <fa-icon [icon]="icon"></fa-icon>
+  <span>{{ message.text }}</span>
+  <button (click)="onClose.emit()" aria-label="Dismiss"><fa-icon [icon]="faXmark"></fa-icon></button>
+</div>

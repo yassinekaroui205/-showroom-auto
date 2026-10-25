@@ -1,0 +1,23 @@
+<header class="header">
+  <div class="brand">
+    <fa-icon [icon]="faCar" class="logo"></fa-icon>
+    <div>
+      <h1>{{ title }}</h1>
+      <span class="tagline">Premium cars, handpicked for you</span>
+    </div>
+  </div>
+
+  <nav class="actions">
+    <button class="nav-btn" [class.active]="favoritesActive" (click)="onToggleFavorites.emit()"
+            title="Show favorites only">
+      <fa-icon [icon]="faHeart"></fa-icon>
+      <span>Favorites</span>
+      <span class="badge">{{ favoritesCount }}</span>
+    </button>
+    <button class="nav-btn" (click)="onOpenReservations.emit()" title="My reservations">
+      <fa-icon [icon]="faKey"></fa-icon>
+      <span>Reservations</span>
+      <span class="badge">{{ reservationsCount }}</span>
+    </button>
+  </nav>
+</header>

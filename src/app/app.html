@@ -1,0 +1,54 @@
+<app-head-bar
+  [title]="title"
+  [favoritesCount]="favoriteIds.length"
+  [reservationsCount]="reservations.length"
+  [favoritesActive]="filters.favoritesOnly"
+  (onToggleFavorites)="toggleFavoritesOnly()"
+  (onOpenReservations)="showReservations = true">
+</app-head-bar>
+
+<main>
+  <app-search-bar
+    [filters]="filters"
+    [brands]="brands"
+    [priceLimit]="priceLimit"
+    [resultCount]="filteredAutos.length"
+    (onFiltersChange)="onFiltersChange($event)"
+    (onReset)="resetFilters()">
+  </app-search-bar>
+
+  <app-auto-list
+    [autos]="filteredAutos"
+    [favoriteIds]="favoriteIds"
+    (onSelect)="selectCar($event)"
+    (onToggleFavorite)="toggleFavorite($event)"
+    (onReserve)="reserve($event)">
+  </app-auto-list>
+</main>
+
+<app-footer-bar [totalCars]="autolist.length" [totalStock]="totalStock"></app-footer-bar>
+
+@if (selectedCar) {
+  <app-auto-detail
+    [auto]="selectedCar"
+    [isFavorite]="isFavorite(selectedCar)"
+    [similar]="similarAutos"
+    (onClose)="closeDetail()"
+    (onToggleFavorite)="toggleFavorite($event)"
+    (onReserve)="reserve($event)"
+    (onSelectSimilar)="selectCar($event)">
+  </app-auto-detail>
+}
+
+@if (showReservations) {
+  <app-reservation-panel
+    [reservations]="reservations"
+    (onClose)="showReservations = false"
+    (onCancel)="cancelReservation($event)"
+    (onClear)="clearReservations()">
+  </app-reservation-panel>
+}
+
+@if (toast) {
+  <app-toast [message]="toast" (onClose)="closeToast()"></app-toast>
+}
